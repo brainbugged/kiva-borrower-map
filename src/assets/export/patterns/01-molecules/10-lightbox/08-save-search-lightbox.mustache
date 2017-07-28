@@ -1,0 +1,51 @@
+{{#is-styleguide}}
+	<a href="#" data-reveal-id="save-search-modal">trigger me!</a>
+{{/is-styleguide}}
+
+<div id="save-search-modal" class="reveal-modal" data-reveal aria-hidden="true" role="dialog">
+	<div class="row">
+		<div class="columns small-12">
+			<a class="close-reveal-modal" aria-label="Close">
+				<svg class="icon icon-x">
+					<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-x"></use>
+				</svg>
+			</a>
+			<div class="lightbox-content white">
+				<h2 class="save-search-header">Save this search</h2>
+				<div class="row inner">
+					<div class="small-12 large-10 columns">
+						<p>
+							With one click you can find the loans you're looking for directly from the "Lend"
+							drop down menu at the top of the page.
+						</p>
+					</div>
+				</div>
+				<div class="row inner">
+					<div class="small-12 large-8 columns">
+						<label for="save-search-text">
+							Name this saved search
+						</label>
+					</div>
+				</div>
+				<div class="row inner">
+					<div class="columns small-12 large-8">
+						<input id="save-search-text" type="text" name="save-search-text">
+					</div>
+				</div>
+				<div class="row inner">
+					<div class="columns small-12 save-search-alert-box">
+						<label class="save-search-alert-label" for="save-search-alert">
+							<input type="checkbox" name="save-search-alert" id="save-search-alert" class="save-search-alert-checkbox">
+							Email me when new loans become available.
+						</label>
+					</div>
+				</div>
+				<div class="row inner">
+					<div class="columns medium-12 large-8">
+						<button class="button submit-save-search">Create Saved Search</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

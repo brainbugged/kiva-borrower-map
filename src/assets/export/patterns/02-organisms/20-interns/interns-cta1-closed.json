@@ -1,0 +1,14 @@
+{
+	"headline": {
+		"medium": "Check back here on [dynamic date] to apply!"
+	},
+
+	"textOverImageNameSpaceClass": "interns-cta1-wrapper-closed",
+
+	"img": {
+		"full-width" : {
+			"alt" : "Photo of Golden Gate Bridge",
+			"src": "//www-kiva-org.global.ssl.fastly.net/cms/page/images/fellows-cta"
+		}
+	}
+}

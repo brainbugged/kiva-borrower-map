@@ -1,0 +1,31 @@
+<div class="pfp-meter">
+    <div class="lender-count">
+        <h2 class="green-bolded">
+            {{lenderCount}} of {{lenderCountNeeded}}
+        </h2>
+
+        <div>lenders</div>
+    </div>
+
+    <div class="fundraising-meter progress">
+        <span class="meter" style="width: {{lenderCountPercent}}%"></span>
+    </div>
+    <p{{#isExpiringSoon}} class="warning"{{/isExpiringSoon}}>
+		{{#inPFPHelpText}}<a class="black-underlined" data-reveal-id="{{dataRevealId}}">{{/inPFPHelpText}}
+            {{timeLeft}} to reach {{lenderCountNeeded}} lenders.
+        {{#inPFPHelpText}}</a>{{/inPFPHelpText}}
+    </p>
+    <div class="amount-raised">
+        <div>
+            ${{amountRaised}} of ${{totalLoanAmount}} raised so far.
+        </div>
+
+        <div class="fundraising-meter progress">
+            <span class="meter" style="width: {{meterAmountPercent}}%"></span>
+        </div>
+    </div>
+
+    {{#inPFPHelpText}}
+        {{> 01-molecules/10-lightbox/04-help-text-lightbox}}
+    {{/inPFPHelpText}}
+</div>

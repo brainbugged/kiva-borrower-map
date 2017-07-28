@@ -1,0 +1,17 @@
+{
+    "my-kiva": {
+        "links": [
+            { "label": "My Loan Page", "href": "#"},
+            { "label": "Conversations", "href": "#"},
+            { "label": "My Borrower Home", "href": "#"},
+            { "label": "Portfolio", "href": "#"},
+            { "label": "My Teams", "href": "#"},
+            { "label": "Donations", "href": "#"},
+            { "label": "Lender Profile", "href": "#"},
+            { "label": "My Campaigns", "href": "#"},
+            { "label": "Settings", "href": "#", "end-section": true},
+            { "label": "Sign Out", "href": "#"}
+        ]
+    },
+    "balance": "$23"
+}

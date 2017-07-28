@@ -1,0 +1,76 @@
+{
+	"main-title": "Finances",
+	"page-title": "Finances",
+	"bar-links": [
+		{
+			"title": "About us"
+		},
+		{
+			"title": "How Kiva works"
+		},
+		{
+			"title": "Where Kiva works"
+		},
+		{
+			"title": "Impact"
+		},
+		{
+			"title": "Leadership"
+		},
+		{
+			"title": "Finances",
+			"active": true
+		},
+		{
+			"title": "Press"
+		},
+		{
+			"title": "Due diligence"
+		}
+	],
+	"has-bar-sub-links": true,
+	"bar-sub-links": [
+		{
+			"sub-title": "Finances",
+			"sub-active": true
+		},
+		{
+			"sub-title": "Our partners"
+		}
+	],
+	"drop-links": [
+		{
+			"title": "Finances",
+			"sub-links": [
+				{
+					"sub-title": "Finances",
+					"sub-active": true
+				},
+				{
+					"sub-title": "Our partners"
+				}
+			]
+		},
+		{
+			"title": "About us"
+		},
+		{
+			"title": "How Kiva works"
+		},
+		{
+			"title": "Where Kiva works"
+		},
+		{
+			"title": "Impact"
+		},
+		{
+			"title": "Leadership"
+		},
+		{
+			"title": "Press"
+		},
+		{
+			"title": "Due diligence"
+		}
+	]
+}

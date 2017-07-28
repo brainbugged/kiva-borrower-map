@@ -1,0 +1,33 @@
+<div class="lender-message">
+	<div class="other-lender">
+		{{#other-lender}}
+			<a href="{{url}}" class="lender-avatar">
+				<span class="circle-avatar" style="background-image:url({{img-url}})"></span>
+			</a>
+		{{/other-lender}}
+		{{^other-lender}}
+			<span class="lender-avatar circle-avatar" style="background-image:url({{anon-img-url}})"></span>
+		{{/other-lender}}
+		<div>Date: {{date}}</div>
+		<div>
+			<span>{{#is-sent}}To{{/is-sent}}{{^is-sent}}From{{/is-sent}}: </span>
+			{{#other-lender}}
+				<a href="{{url}}">{{name}}</a>
+				{{#location}}<span> | {{location}}</span>{{/location}}
+			{{/other-lender}}
+			{{^other-lender}}
+				<span>Anonymous</span>
+			{{/other-lender}}
+		</div>
+	</div>
+	<p class="message-body">
+		{{{message-body}}}
+	</p>
+    {{^is-sent}}
+        <div class="actions">
+			<a class="button reply-button">Reply</a>
+            <a class="button secondary delete-button">Delete</a>
+        </div>
+    {{/is-sent}}
+	<div class="spacer" style="clear:both"></div>
+</div>

@@ -1,0 +1,104 @@
+{
+	"headline": {
+		"medium": "We envision a world where all people hold the power to create opportunity for themselves and others."
+	},
+	"textOverImageNameSpaceClass": "about-headline-wrapper",
+	"img": {
+		"full-width" : {
+			"alt" : "Photo of hands and a leaf"
+		}
+	},
+	"main-title": "About",
+	"page-title": "About Us",
+	"bar-links": [
+		{
+			"title": "About us",
+			"active": true
+		},
+		{
+			"title": "Get to know us"
+		},
+		{
+			"title": "How Kiva works"
+		},
+		{
+			"title": "Where Kiva works"
+		},
+		{
+			"title": "Impact"
+		},
+		{
+			"title": "Press"
+		},
+		{
+			"title": "Due diligence"
+		}
+	],
+	"has-bar-sub-links": true,
+	"bar-sub-links": [
+		{
+			"sub-title": "Labs"
+		},
+		{
+			"sub-title": "Kiva Live"
+		},
+		{
+			"sub-title": "Success Stories",
+			"sub-active": true
+		},
+		{
+			"sub-title": "Social Performance"
+		}
+	],
+	"drop-links": [
+		{
+			"title": "Impact",
+			"sub-links": [
+				{
+					"sub-title": "Labs"
+				},
+				{
+					"sub-title": "Kiva Live"
+				},
+				{
+					"sub-title": "Success Stories",
+					"sub-active": true
+				},
+				{
+					"sub-title": "Social Performance"
+				}
+			]
+		},
+		{
+			"title": "About us"
+		},
+		{
+			"title": "Get to know us"
+		},
+		{
+			"title": "How Kiva works"
+		},
+		{
+			"title": "Where Kiva works"
+		},
+		{
+			"title": "Press Center"
+		},
+		{
+			"title": "Due diligence"
+		}
+	],
+	"basket" : {
+		"item_count": 0
+	},
+	"lightbox": {
+		"video": {
+			"youtube": {
+				"src": "//www.youtube.com/embed/lSN2WdqXwfc?controls=0&showinfo=0&rel=0&hd=1",
+				"modal-title": "Beyond Charity, rethinking how we give.",
+				"width": "100%",
+				"frameborder": "0"
+			}
+		}
+	}
+}

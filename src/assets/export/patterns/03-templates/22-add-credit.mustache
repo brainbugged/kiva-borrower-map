@@ -1,0 +1,54 @@
+<div class="small-12 large-9 columns add-credit">
+
+	<h1>Add credit</h1>
+
+	<div class="add-credit-form add-credit-state">
+		<p>Add funds to your Kiva balance, making it easier to lend when you find borrowers you want to support.</p>
+
+		<form data-abide="ajax" class="small-12">
+		  <div class="amount-to-deposit-field row collapse">
+			<label class="small-12 medium-3 columns">Amount to deposit
+				<input type="text" placeholder="$ USD" required data-abide-validator="currency" data-min-amount="0.01" data-max-amount="10000"/>
+			</label>
+			<small class="error small-12 medium-7 end columns">
+					<svg class="icon icon-error">
+						<use xlink:href="#icon-error"/>
+					</svg>
+					Deposits must be a valid amount in USD and are limited to $10,000. If you'd like to add more, please do so in separate deposits.
+				</small>
+		  </div>
+			<div class="monthly-deposit-field small-12 medium-6">
+				{{#is_auto_deposit_active}}
+					<p><a class="small" href="{{auto_deposit_url}}">Make a monthly deposit</a></p>
+				{{/is_auto_deposit_active}}
+
+				{{^is_auto_deposit_active}}
+					<label>
+						<input type="checkbox" />
+						Make this a monthly deposit.
+					</label>
+				{{/is_auto_deposit_active}}
+			</div>
+		  <button id="continue-button" type="submit" class="small-12 medium-6">Continue</button>
+		</form>
+
+		<div class="explainer">
+		  <p class="paypal-message small-text">Thanks to PayPal, Kiva receives free payment processing.</p>
+		  {{^express-checkout-on-deposit}}
+			<img src="https://www.kiva.org/images/cc_strip.png" alt="PayPal, Mastercard, Visa, Discover, American Express">
+		  {{/express-checkout-on-deposit}}
+		</div>
+	</div>
+
+	<div class="add-credit-pending add-credit-state hide">
+	  <h3>Payment pending...</h3>
+	  <p class="featured">{{> 01-molecules/03-media/01-loading-spinner}}</p>
+	</div>
+
+	<div class="add-credit-thanks add-credit-state hide">
+	  <h3>Thanks for adding to your Kiva account!</h3>
+	  <p>We're currently processing your deposit and you should see <a href="/portfolio" title="Go to portfolio">your portfolio</a> balance update by <strong class="amount-paid kiva-green"></strong> momentarily.</p>
+	</div>
+
+</div>
+<div class="spacer" style="clear:both"></div>

@@ -1,0 +1,11 @@
+{
+	"amountLeft": 75,
+	"totalLoanAmount": 275,
+	"lenderCount": 5,
+	"meterAmountPercent": 28,
+	"status": "Paying Back",
+	"showRaisedInfo": true,
+	"raisedVerb": "funded",
+	"isExpiringSoon": false,
+	"loanLengthMessage": null
+}

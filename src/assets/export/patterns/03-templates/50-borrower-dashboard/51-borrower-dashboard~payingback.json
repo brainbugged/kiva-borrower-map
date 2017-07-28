@@ -1,0 +1,21 @@
+{
+	"isPayingBack": true,
+	"isPayingBackDelinquent": false,
+	"prettyStatus": "Paying back",
+	"showRaisedInfo": true,
+	"meterAmountPercent": 25,
+	"raisedVerb": "repaid",
+	"amountLeft": "7,725",
+	"totalLoanAmount": "10,000",
+	"lenderCount": 39,
+	"actionButton": {
+		"url": "#",
+		"text": "Make repayment"
+	},
+	"repayments": {
+		"amount": "$260.77",
+		"dueDate": "March 20th, 2017",
+		"payNowUrl": "#",
+		"scheduleUrl": "#"
+	}
+}

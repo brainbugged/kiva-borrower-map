@@ -1,0 +1,61 @@
+<div class="sitewide-appeal-wrapper">
+	<div class="sitewide-appeal row">
+		<div class="sitewide-header"data-kv-accordion aria-controls="ac-sitewide-appeal" {{#isExpanded}}aria-expanded="true"{{/isExpanded}}{{^isExpanded}}aria-expanded="false"{{/isExpanded}}>
+			<h2>
+				Fighting for a better future? We need your help.
+				<span class="dropdown-icon">
+					<svg stroke-width="7" class="icon icon-large-chevron">
+						<use xlink:href="#icon-large-chevron"></use>
+					</svg>
+				</span>
+			</h2>
+		</div>
+		<div class="sitewide-body" id="ac-sitewide-appeal" {{#isExpanded}}aria-hidden="false"{{/isExpanded}}{{^isExpanded}}aria-hidden="true"{{/isExpanded}}>
+			<div class="circle-avatar show-for-medium-up" style="background-image:url({{photoUrl}})"></div>
+			<div class="message">
+				<div>
+					Creating a more equitable world takes a lot of time and energy, but at Kiva we’re in it for the long haul. 100% of money lent on Kiva goes to funding loans. That means we rely on donations from people like you to make this work possible.
+					{{#match}}
+						<strong>For a limited time, if you donate $35 or more, a $25 bonus will be added to your account (you’ll get an email once it’s there).</strong>
+					{{/match}}
+				</div>
+				<div class="closing show-for-medium-up">
+					{{^match}}
+						Your donation of any size makes a difference. Thanks for investing in a better future,<br>
+					{{/match}}
+					Premal Shah, President & Co-Founder, Kiva
+				</div>
+			</div>
+
+			<div class="donation-buttons">
+				<ul class="small-block-grid-2 medium-block-grid-5">
+					<li>
+						<div class="item fixed-amount button smaller" role="button" value="25">$25</div>
+					</li>
+
+					<li>
+						<div class="item fixed-amount button smaller fixed-amount" role="button" value="35">$35</div>
+					</li>
+
+					<li>
+						<div class="item fixed-amount button smaller fixed-amount" role="button" value="50">$50</div>
+					</li>
+
+					<li class="show-for-medium-up">
+						<div class="item custom-amount">
+							<input id="sitewide-custom-amount" name="sitewide-custom-amount" type="text" placeholder="other" aria-label="custom donation amount">
+						</div>
+					</li>
+
+					<li class="show-for-medium-up">
+						<div class="item button smaller setting custom-submit inactive" role="button">Submit</div>
+					</li>
+
+					<li class="show-for-small-only">
+						<div class="item button smaller other-amount" role="button">Other</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,39 @@
+<div class="portfolio-main">
+    <div class="row">
+        <div class="small-12 columns impact lender-name">{{lenderName}}</div>
+    </div>
+
+    <div class="row">
+        {{#outstandingBalanceStat}}
+            <div class="columns small-6 {{#freeCreditStat}}large-4{{/freeCreditStat}}{{^freeCreditStat}}large-6{{/freeCreditStat}}">
+                {{> 01-molecules/06-components/10-statistic-display}}
+            </div>
+        {{/outstandingBalanceStat}}
+
+        {{#availableKivaCreditStat}}
+			<div class="columns small-6 {{#freeCreditStat}}large-4{{/freeCreditStat}}{{^freeCreditStat}}large-6{{/freeCreditStat}}">
+				{{#is_auto_deposit_active}}
+					{{> 01-molecules/06-components/10-statistic-display}}
+				{{/is_auto_deposit_active}}
+
+				{{^is_auto_deposit_active}}
+					{{> 01-molecules/06-components/12-statistic-display-with-local-lightbox}}
+				{{/is_auto_deposit_active}}
+			</div>
+		{{/availableKivaCreditStat}}
+
+        {{#freeCreditStat}}
+            <div class="columns small-12 large-4">
+                {{> 01-molecules/06-components/10-statistic-display}}
+            </div>
+        {{/freeCreditStat}}
+    </div>
+
+    <div class="row bottom-rule">
+        <div class="columns small-12 large-12">
+            <a href="{{findALoanUrl}}" class="button findALoanButton">{{findALoanText}}</a>
+        </div>
+    </div>
+</div>
+
+{{> 01-molecules/10-lightbox/11-credit-summary-lightbox}}

@@ -1,0 +1,19 @@
+{
+  "figures": [
+    {
+      "youtube-video-id": "lSN2WdqXwfc"
+    },
+    {
+      "url": "//www.kiva.org/img/w800/1970076.jpg",
+      "alt": "one"
+    },
+    {
+      "url": "//www.kiva.org/img/w800/1969963.jpg",
+      "alt": "two"
+    }
+  ],
+  "is_matched": true,
+  "matching_text": "Your loan will be matched!",
+  "show_loan_expiration": true,
+  "loan_length": "12 months"
+}

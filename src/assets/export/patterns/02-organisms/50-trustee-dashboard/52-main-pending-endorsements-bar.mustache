@@ -1,0 +1,23 @@
+<div class="pending-endorsements">
+	<div class="row">
+		<div class="columns large-12">
+			<h2 class="scalable">Pending Endorsements</h2>
+			<p>These borrowers applied for a loan using your referral link, but haven’t been endorsed yet.</p>
+		</div>
+	</div>
+	<div class="pending-endorsements-results-region">
+		{{#trustee-borrowers}}
+			{{#isPending}}
+			<div class="borrower-item-row">
+				{{> 02-organisms/50-trustee-dashboard/63-borrower-network-listing-item}}
+			</div>
+			{{/isPending}}
+		{{/trustee-borrowers}}
+	</div>
+	{{#show-more-pending}}
+		<div class="show-more-pending">View more</div>
+	{{/show-more-pending}}
+	{{#show-less-pending}}
+		<div class="show-less-pending">View less</div>
+	{{/show-less-pending}}
+</div>

@@ -1,0 +1,77 @@
+<article class="ac-body" id="ac-lenders-teams-body" aria-hidden="false">
+
+	{{! ------------------------- Lenders section -------------------------------- }}
+
+	<div class="lenders-title">Contributing lenders ({{lenderCount}})</div>
+	<ul class="lenders">
+		{{#lenders}}
+			<li>
+				{{> 01-molecules/03-media/02-lender-avatar }}
+			</li>
+		{{/lenders}}
+	</ul>
+	<div class="lender-controls">
+		{{#lendersExpanded}}
+			{{#beyondLenderCutoffCount}}
+				{{#lendersLoading}}
+					{{> 01-molecules/03-media/01-loading-spinner }}
+				{{/lendersLoading}}
+				<a href="#" class="show-more-lenders black-underlined text-center">Show more</a>
+				<div style="clear:both;"></div>
+			{{/beyondLenderCutoffCount}}
+			{{^beyondLenderCutoffCount}}
+				{{#numAnonymousLenders}}
+					<div class="anonymous-lender-message text-center">+ {{numAnonymousLenders}} anonymous lenders</div>
+				{{/numAnonymousLenders}}
+			{{/beyondLenderCutoffCount}}
+			<a href="#" class="hide-more-lenders black-underlined text-center">Hide</a>
+		{{/lendersExpanded}}
+		{{^lendersExpanded}}
+			{{#showSpilloverMessageForLenders}}
+				<a href="#" class="show-all-lenders black-underlined text-center">Show more</a>
+			{{/showSpilloverMessageForLenders}}
+		{{/lendersExpanded}}
+	</div>
+
+	{{! ------------------------- Teams section -------------------------------- }}
+
+	<div class="teams-title">Contributing teams ({{teamCount}})</div>
+	<ul class="teams">
+		{{#teams}}
+			<li>
+				{{#displayTooltip}}
+					<a href="{{url}}">
+						<span data-tooltip
+							  aria-haspopup="true"
+							  data-options="disable_for_touch:true; show_on:large"
+							  title="{{teamName}}<br>{{teamType}}<br>{{numLenders}} of {{numTeamMembers}} members"
+							  class="circle-avatar tip-top"
+							  style="background-image:url({{imgUrl}})">
+						</span>
+					</a>
+				{{/displayTooltip}}
+				{{^displayTooltip}}
+					<span class="circle-avatar" style="background-image:url({{imgUrl}})"></span>
+				{{/displayTooltip}}
+			</li>
+		{{/teams}}
+	</ul>
+	<div class="team-controls">
+		{{#teamsExpanded}}
+			{{#beyondTeamCutoffCount}}
+				{{#teamsLoading}}
+					{{> 01-molecules/03-media/01-loading-spinner }}
+				{{/teamsLoading}}
+				<a href="#" class="show-more-teams black-underlined text-center">Show more</a>
+				<div style="clear:both;"></div>
+			{{/beyondTeamCutoffCount}}
+			<a href="#" class="hide-more-teams black-underlined text-center">Hide</a>
+		{{/teamsExpanded}}
+		{{^teamsExpanded}}
+			{{#showSpilloverMessageForTeams}}
+				<a href="#" class="show-all-teams black-underlined text-center">Show more</a>
+			{{/showSpilloverMessageForTeams}}
+		{{/teamsExpanded}}
+	</div>
+
+</article>

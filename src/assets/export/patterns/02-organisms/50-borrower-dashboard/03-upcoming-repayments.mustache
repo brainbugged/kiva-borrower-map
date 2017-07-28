@@ -1,0 +1,38 @@
+<div class="upcoming-repayments">
+	<h2>Upcoming repayments</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Amount</th>
+				<th>Due date</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr {{#overdue}}class="overdue"{{/overdue}}>
+				<td>{{amount}}</td>
+				<td>{{#overdue}}Immediately{{/overdue}}{{^overdue}}{{dueDate}}{{/overdue}}</td>
+				{{#hasAutoRepayment}}
+					<td style="text-align: center;">
+						<i>Automatic repayments active</i><br/>
+						<a class="auto-repayment-navigate">View/Edit</a>
+					</td>
+				{{/hasAutoRepayment}}
+				{{^hasAutoRepayment}}
+					<td><a href="{{payNowUrl}}" class="small button">Pay now</a></td>
+				{{/hasAutoRepayment}}
+			</tr>
+			{{! i think this block only shows when there is an overdue repayment }}
+			{{#nextRepayment}}{{#overdue}}
+				<tr>
+					<td>{{amount}}</td>
+					<td>{{dueDate}}</td>
+					<td></td>
+				</tr>
+			{{/overdue}}{{/nextRepayment}}
+		</tbody>
+	</table>
+	<div class="more-info">
+		<a href="{{profileLink}}#repaymentSchedule">View repayment schedule</a>
+	</div>
+</div>
