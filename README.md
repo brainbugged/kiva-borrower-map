@@ -1,6 +1,6 @@
 # kiva-borrower-map
 
-> Presentation of Kiva Borrowers businesses on a map. Uses a combintation of known business entities with a Yelp link along with the Yelp api to gather accurate location data to power the map. 
+> Presentation of Kiva Borrowers businesses on a map. Uses a combintation of known business entities with a Yelp link along with the Yelp api to gather accurate location data to power the map.
 
 ## Build Setup
 
@@ -10,6 +10,9 @@ npm install
 
 # serve with hot reload at localhost:8080
 npm run dev
+
+# serve with hot reload at localhost:8080 + API at localhost:8081 (make sure to install PM2 - npm install pm2 -g)
+npm run dev-api
 
 # build for production with minification
 npm run build
