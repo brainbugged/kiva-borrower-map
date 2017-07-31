@@ -27,6 +27,36 @@
     <div>
       <h2>JSON Sandbox</h2>
       <p id="json">data lives here</p>
+
+      <p>Click the button to get your coordinates.</p>
+
+      <button onclick="getLocation()">I am Here</button>
+
+      <p id="demo"></p>
+
+      <script>
+      // user geolocation data 
+      let x = document.getElementById("demo");
+
+      function getLocation() {
+          if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(showPosition);
+          } else {
+              x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+      }
+
+      function showPosition(position) {
+          x.innerHTML = "Latitude: " + position.coords.latitude +
+          "<br>Longitude: " + position.coords.longitude;
+
+      }
+
+
+
+      </script>
+
+
     </div>
 
       <p id="demo"></p>
@@ -48,9 +78,11 @@
          }).addTo(map);
 
     L.marker(test_marker, title="fists of flower").addTo(map)
+    // user geolocation marker -- doesn't work
+    L.marker([position.coords.latitude, position.coords.longitude], title="here i am!").addTo(map)
 
-    var popup = L.popup()
-    .setLatLng(test_marker )
+    let popup = L.popup()
+    // .setLatLng(test_marker )
     .setContent('<p>Test: Fists of Flower </p>')
     .openOn(map);
 
