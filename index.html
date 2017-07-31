@@ -36,6 +36,7 @@
       map should live here
 
     <script>
+    let test_marker = [37.7887078, -122.1957755]
 
     let map = L.map('map').setView({lat:37.774, lng:-122.4194}, 13);
      mapLink =
@@ -45,6 +46,15 @@
          attribution: 'Map data &copy; ' + mapLink,
          maxZoom: 18,
          }).addTo(map);
+
+    L.marker(test_marker, title="fists of flower").addTo(map)
+
+    var popup = L.popup()
+    .setLatLng(test_marker )
+    .setContent('<p>Test: Fists of Flower </p>')
+    .openOn(map);
+
+    marker.bindPopup(popupContent).openPopup()
 
     </script>
 
