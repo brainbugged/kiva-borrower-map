@@ -2,62 +2,49 @@
 <html>
   <head>
     <meta charset="utf-8">
-
-    <link
-        rel="stylesheet"
-        href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"
-    />
-  <style>
-  #map { height:600px;
-          width:1000px}
-  </style>
-  <!-- Make sure you put this AFTER Leaflet's CSS -->
-<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-</script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+    <style>
+      #map { height:250px;
+        width:100%;
+      }
+    </style>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script type="text/javascript" 
+      src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+    <script type="text/javascript" 
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <title>kiva-borrower-map</title>
   </head>
 
   <body>
-    <div id="app">
-
-    </div>
-    <!-- built files will be auto injected -->
-    <div>
-      <h2>JSON Sandbox</h2>
-      <p id="json">data lives here</p>
-    </div>
-
-      <p id="demo"></p>
-
     <div id="map">
+      <script>
+        !(function() {
+          let test_marker = [37.7887078, -122.1957755]
 
-      map should live here
+          // let map = L.map('map').setView({lat:37.774, lng:-122.4194}, 13);
+          let map = L.map('map').setView({lat:test_marker[0], lng:test_marker[1]}, 11);
+          
+          let mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 
-    <script>
-    let test_marker = [37.7887078, -122.1957755]
+          L.tileLayer(
+            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; ' + mapLink,
+            maxZoom: 18,
+          }).addTo(map);
 
-    let map = L.map('map').setView({lat:37.774, lng:-122.4194}, 13);
-     mapLink =
-         '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-     L.tileLayer(
-         'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-         attribution: 'Map data &copy; ' + mapLink,
-         maxZoom: 18,
-         }).addTo(map);
+          L.marker(test_marker, title="fists of flower").addTo(map);
 
-    L.marker(test_marker, title="fists of flower").addTo(map)
+          // var popup = L.popup()
+          // .setLatLng(test_marker )
+          // .setContent('<p>Test: Fists of Flower </p>')
+          // .openOn(map);
 
-    var popup = L.popup()
-    .setLatLng(test_marker )
-    .setContent('<p>Test: Fists of Flower </p>')
-    .openOn(map);
-
-    marker.bindPopup(popupContent).openPopup()
-
-    </script>
-
+          // test_marker.bindPopup(popup).openPopup()
+        })();
+      </script>
     </div>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
   </body>
 </html>
