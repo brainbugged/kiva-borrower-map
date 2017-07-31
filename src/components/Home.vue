@@ -50,20 +50,19 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.leaflet-fake-icon-image-2x {
-  background-image: url(../../node_modules/leaflet/dist/images/marker-icon-2x.png);
+<style type="text/css">
+.map-holder {
+  display: block;
+  height: 300px;
+  width: 100%;
 }
-.leaflet-fake-icon-shadow {
-  background-image: url(../../node_modules/leaflet/dist/images/marker-shadow.png);
+
+@import "../../node_modules/leaflet/dist/leaflet.css";
+/*
+.leaflet-icon-image-2x {
+  background-image: url(../assets/images/marker-icon-2x.png);
 }
-  @import "../../node_modules/leaflet/dist/leaflet.css";
-  .map-holder {
-    display: block;
-    height: 300px;
-    width: 100%;
-  }
-    #map { height:300px;
-      width:100%;
-    }
+.leaflet-icon-shadow {
+  background-image: url(../assets/images/marker-shadow.png);
+} */
 </style>

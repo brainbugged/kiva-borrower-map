@@ -15,7 +15,7 @@
 import ListItem from './List-Item.vue'
 
 export default {
-  name: 'app',
+  name: 'list',
   props: ['fetchedLocations'],
   methods: {},
   mounted () {

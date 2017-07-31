@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'app',
+  name: 'list-item',
   props: ['location']
 }
 </script>
@@ -18,7 +18,7 @@ export default {
         border-top: 1px solid #CCC;
         padding: .5rem 0;
     }
-    
+
     h4 {
         margin: 0;
     }
