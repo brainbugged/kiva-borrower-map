@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
     <style>
-      #map { height:250px;
+      #map { height:300px;
         width:100%;
       }
     </style>
@@ -21,9 +21,7 @@
 
     </div>
     <!-- built files will be auto injected -->
-    <div>
-      <h2>JSON Sandbox</h2>
-      <p id="json">data lives here</p>
+    <div.
 
       <p>Click the button to get your coordinates.</p>
 
@@ -47,6 +45,7 @@
           x.innerHTML = "Latitude: " + position.coords.latitude +
           "<br>Longitude: " + position.coords.longitude;
 
+          //
           let userLocation = { "lat": position.coords.latitude,
                           "lng" : position.coords.longitude
             }
@@ -69,7 +68,7 @@
     <script>
     let test_marker = [37.7887078, -122.1957755]
 
-    let map = L.map('map').setView({lat:37.774, lng:-122.4194}, 13);
+    let map = L.map('map').setView({lat:37.774, lng:-122.4194}, 10);
      mapLink =
          '<a href="http://openstreetmap.org">OpenStreetMap</a>';
      L.tileLayer(
@@ -79,9 +78,11 @@
          }).addTo(map);
 
     L.marker(test_marker, title="fists of flower").addTo(map)
+    
     // user geolocation marker -- doesn't work
     let userMarker = showPosition(position)
-    L.marker([userMarker.lat, userMarker.lng, title="here i am!").addTo(map)
+    alert(userMarker.lat, userMarker.lng)
+    L.marker([userMarker.lat, userMarker.lng], title="here i am!").addTo(map)
 
     let popup = L.popup()
     // .setLatLng(test_marker )
