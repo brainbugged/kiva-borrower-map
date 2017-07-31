@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div class="map-holder">
+      <MapView v-bind:fetchedLocations="locations"></MapView>
+    </div>
     <h1>{{ msg }}</h1>
     <div class="list-holder">
       <LocationList v-bind:fetchedLocations="locations"></LocationList>
@@ -10,6 +13,7 @@
 <script>
 import LocationList from './Location-List.vue'
 import * as axios from 'axios'
+import MapView from './Map.vue'
 
 export default {
   name: 'home',
@@ -20,7 +24,8 @@ export default {
     }
   },
   components: {
-    LocationList
+    LocationList,
+    MapView
   },
   methods: {
     fetchLocations: function (query) {
@@ -46,8 +51,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h1 {
-    margin: 0;
-    padding: 1rem .5rem;
+.leaflet-fake-icon-image-2x {
+  background-image: url(../../node_modules/leaflet/dist/images/marker-icon-2x.png);
+}
+.leaflet-fake-icon-shadow {
+  background-image: url(../../node_modules/leaflet/dist/images/marker-shadow.png);
+}
+  @import "../../node_modules/leaflet/dist/leaflet.css";
+  .map-holder {
+    display: block;
+    height: 300px;
+    width: 100%;
   }
+    #map { height:300px;
+      width:100%;
+    }
 </style>
