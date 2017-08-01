@@ -1,6 +1,7 @@
 <template>
     <div class="location-list">
         <ul id="locations">
+            <!-- Using Vue bindings to loop over data and bind properties to each ListItem instance -->
             <ListItem
                 v-for="(location, index) in fetchedLocations"
                 v-bind:location="location"

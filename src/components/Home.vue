@@ -1,16 +1,19 @@
 <template>
   <div class="container">
     <div class="map-holder">
-      <MapView v-bind:fetchedLocations="locations"></MapView>
+      <!-- MapView component with fetchedLocations dynamically bound using v-bind shorthand -->
+      <MapView :fetchedLocations="locations"></MapView>
     </div>
     <h1>{{ msg }}</h1>
     <div class="list-holder">
+      <!-- LocationList  component with fetchedLocations dynamically bound using v-bind standard -->
       <LocationList v-bind:fetchedLocations="locations"></LocationList>
     </div>
   </div>
 </template>
 
 <script>
+import bus from './Event-Bus'
 import LocationList from './Location-List.vue'
 import * as axios from 'axios'
 import MapView from './Map.vue'
@@ -28,23 +31,26 @@ export default {
     MapView
   },
   methods: {
+    // Fetch our initial batch of Locations
     fetchLocations: function (query) {
       let _this = this
-      console.log(query)
+      // console.log(query)
       axios.get('/locations').then((data) => {
         console.log(data)
+        // Assign our locations to the component data node for locations
         data.data.forEach(function (element) {
           _this.locations.push(element)
         }, this)
       })
     }
   },
-  mounted () {
-    console.log('Home is mounted')
+  beforeMount () {
     this.fetchLocations('test query')
   },
-  beforeCreate () {
-    console.log('BEFORE Home is created')
+  mounted () {
+    console.log('Home is mounted')
+    // sample event emitted via event bus
+    bus.$emit('home-loaded', 'home is loaded')
   }
 }
 </script>
@@ -53,7 +59,7 @@ export default {
 <style type="text/css">
 .map-holder {
   display: block;
-  height: 300px;
+  height: 600px;
   width: 100%;
 }
 
