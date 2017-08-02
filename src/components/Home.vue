@@ -8,7 +8,7 @@
     <h1>{{ msg }}</h1>
     <!--does this bind the method getLocation  from Locator.vue to the variable userLocation? -->
     <div class="locator-holder">
-      <Locator :getLocation="userLocation"></Locator>
+      <Locator v-on:getLocation="showUserLocation"></Locator>
     </div>
     <div class="list-holder">
       <!-- LocationList  component with fetchedLocations dynamically bound using v-bind standard -->
@@ -75,6 +75,9 @@ export default {
           _this.locations.push(element)
         }, this)
       })
+    },
+    showUserLocation: function (userLocation) {
+      console.log(userLocation)
     }
   },
   beforeMount () {

@@ -30,8 +30,9 @@ export default {
       this.locatorDiv().innerHTML = 'Latitude: ' + position.coords.latitude +
         '<br>Longitude: ' + position.coords.longitude
 
+      this.$emit('getLocation', position.coords)
       // returns userLocation so it can be used the center the map?
-      console.log(position)
+      // console.log(position.coords)
       // let userLocation = {'lat': position.coords.latitude,
       //   'lng': position.coords.longitude
       // }
