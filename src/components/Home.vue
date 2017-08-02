@@ -9,7 +9,6 @@
     <!--does this bind the method getLocation  from Locator.vue to the variable userLocation? -->
     <div class="locator-holder">
       <Locator :getLocation="userLocation"></Locator>
-     <h2> {{ userLocation }} </h2>
     </div>
     <div class="list-holder">
       <!-- LocationList  component with fetchedLocations dynamically bound using v-bind standard -->
