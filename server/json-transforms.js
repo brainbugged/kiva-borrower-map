@@ -45,7 +45,7 @@ function filterLocations(jsonData, customBounds) {
     console.log(boundaries);
 
     let filteredResults = [];
-    
+
     jsonData.forEach(function(obj, index) {
         if (isWithinBounds(obj.coordinates.latitude, obj.coordinates.longitude)) {
             filteredResults.push(obj);
@@ -62,7 +62,7 @@ function filterLocations(jsonData, customBounds) {
  * @param lng
 */
 function isWithinBounds(lat, lng) {
-    if (lat >= boundaries.latmin 
+    if (lat >= boundaries.latmin
         && lat <= boundaries.latmax
         && lng >= boundaries.lngmin
         && lng <= boundaries.lngmax) {

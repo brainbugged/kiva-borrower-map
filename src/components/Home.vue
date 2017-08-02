@@ -5,6 +5,11 @@
       <MapView :fetchedLocations="locations"></MapView>
     </div>
     <h1>{{ msg }}</h1>
+    <!--does this bind the method getLocation  from Locator.vue to the variable userLocation? -->
+    <div class="locator-holder">
+      <Locator :getLocation="userLocation"></Locator>
+     <h2> {{ userLocation }} </h2>
+    </div>
     <div class="list-holder">
       <!-- LocationList  component with fetchedLocations dynamically bound using v-bind standard -->
       <LocationList v-bind:fetchedLocations="locations"></LocationList>
@@ -17,18 +22,21 @@ import bus from './Event-Bus'
 import LocationList from './Location-List.vue'
 import * as axios from 'axios'
 import MapView from './Map.vue'
+import Locator from './Locator.vue'
 
 export default {
   name: 'home',
   data () {
     return {
       msg: 'Kiva US Borrowers',
-      locations: []
+      locations: [],
+      userLocation: 'user coordinates go here eventually'
     }
   },
   components: {
     LocationList,
-    MapView
+    MapView,
+    Locator
   },
   methods: {
     // Fetch our initial batch of Locations
