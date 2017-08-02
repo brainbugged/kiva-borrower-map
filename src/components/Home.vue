@@ -6,6 +6,10 @@
       <MapView :fetchedLocations="locations" :lat="lat" :lng="lng"></MapView>
     </div>
     <h1>{{ msg }}</h1>
+    <!--does this bind the method getLocation  from Locator.vue to the variable userLocation? -->
+    <div class="locator-holder">
+      <Locator :getLocation="userLocation"></Locator>
+    </div>
     <div class="list-holder">
       <!-- LocationList  component with fetchedLocations dynamically bound using v-bind standard -->
       <LocationList v-bind:fetchedLocations="locations"></LocationList>
@@ -19,6 +23,7 @@ import SearchBar from './Search-Bar.vue'
 import LocationList from './Location-List.vue'
 import * as axios from 'axios'
 import MapView from './Map.vue'
+import Locator from './Locator.vue'
 
 export default {
   name: 'home',
@@ -33,6 +38,7 @@ export default {
   components: {
     LocationList,
     MapView,
+    Locator,
     SearchBar
   },
   methods: {
