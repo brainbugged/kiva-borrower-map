@@ -79,8 +79,8 @@ function isWithinBounds(lat, lng) {
 */
 function minMaxCoordinates(latLngObject, searchRadius) {
     let bounds = {};
-    let latitude = latLngObject ? latLngObject.lat : OAKLAND.lat;
-    let longitude = latLngObject ? latLngObject.lng : OAKLAND.lng;
+    let latitude = latLngObject ? parseFloat(latLngObject.lat) : OAKLAND.lat;
+    let longitude = latLngObject ? parseFloat(latLngObject.lng) : OAKLAND.lng;
     let radius = searchRadius ? searchRadius : 1; // in miles
 
     bounds.latmin = latitude - (radius / 69);
