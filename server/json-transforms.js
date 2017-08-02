@@ -45,7 +45,7 @@ function filterLocations(jsonData, customBounds) {
     console.log(boundaries);
 
     let filteredResults = [];
-    
+
     jsonData.forEach(function(obj, index) {
         if (isWithinBounds(obj.coordinates.latitude, obj.coordinates.longitude)) {
             filteredResults.push(obj);
@@ -62,7 +62,7 @@ function filterLocations(jsonData, customBounds) {
  * @param lng
 */
 function isWithinBounds(lat, lng) {
-    if (lat >= boundaries.latmin 
+    if (lat >= boundaries.latmin
         && lat <= boundaries.latmax
         && lng >= boundaries.lngmin
         && lng <= boundaries.lngmax) {
@@ -79,8 +79,8 @@ function isWithinBounds(lat, lng) {
 */
 function minMaxCoordinates(latLngObject, searchRadius) {
     let bounds = {};
-    let latitude = latLngObject ? latLngObject.lat : OAKLAND.lat;
-    let longitude = latLngObject ? latLngObject.lng : OAKLAND.lng;
+    let latitude = latLngObject ? parseFloat(latLngObject.lat) : OAKLAND.lat;
+    let longitude = latLngObject ? parseFloat(latLngObject.lng) : OAKLAND.lng;
     let radius = searchRadius ? searchRadius : 1; // in miles
 
     bounds.latmin = latitude - (radius / 69);

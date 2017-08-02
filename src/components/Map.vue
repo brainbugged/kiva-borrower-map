@@ -11,12 +11,14 @@ export default {
   data () {
     return {
       // mapView: {}
+      // lat: this.lat,
+      // lng: this.lng
     }
   },
-  props: ['fetchedLocations'],
+  props: ['fetchedLocations', 'lat', 'lng'],
   methods: {
     initalizeMap: function () {
-      this.mapView = L.map('map').setView({lat: 37.8043722, lng: -122.2708026}, 15)
+      this.mapView = L.map('map').setView({lat: this.lat, lng: this.lng}, 15)
 
       let mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>'
 
@@ -27,6 +29,7 @@ export default {
         }).addTo(this.mapView)
     },
     displayLocations: function () {
+      this.centerMap()
       // console.log(this.mapView)
       let _this = this
       this.fetchedLocations.forEach(function (location, index) {
@@ -55,6 +58,9 @@ export default {
         '<br><small><a href="' + loc.url + '" target="_blank">View on Yelp</a></small>'
 
       return popUpTemplate
+    },
+    centerMap: function () {
+      this.mapView.setView({lat: this.lat, lng: this.lng})
     }
   },
   watch: {
@@ -78,46 +84,6 @@ export default {
     })
   }
 }
-
-/*
-// user geolocation data
-let x = document.getElementById("demo");
-
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-    "<br>Longitude: " + position.coords.longitude;
-
-    //
-    let userLocation = { "lat": position.coords.latitude,
-                    "lng" : position.coords.longitude
-      }
-
-    return userLocation
-
-}
-
-  <button onclick="getLocation()">I am Here</button>
-
-// // user geolocation marker -- doesn't work
-// let userMarker = showPosition(position)
-// alert(userMarker.lat, userMarker.lng)
-// L.marker([userMarker.lat, userMarker.lng], title="here i am!").addTo(map)
-
-let popup = L.popup()
-// .setLatLng(test_marker )
-.setContent('<p>Test: Fists of Flower </p>')
-.openOn(map);
-
-marker.bindPopup(popupContent).openPopup()
-*/
 </script>
 
 <style type="text/css">
