@@ -11,12 +11,14 @@ export default {
   data () {
     return {
       // mapView: {}
+      // lat: this.lat,
+      // lng: this.lng
     }
   },
-  props: ['fetchedLocations'],
+  props: ['fetchedLocations', 'lat', 'lng'],
   methods: {
     initalizeMap: function () {
-      this.mapView = L.map('map').setView({lat: 37.8043722, lng: -122.2708026}, 15)
+      this.mapView = L.map('map').setView({lat: this.lat, lng: this.lng}, 15)
 
       let mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>'
 
@@ -27,6 +29,7 @@ export default {
         }).addTo(this.mapView)
     },
     displayLocations: function () {
+      this.centerMap()
       // console.log(this.mapView)
       let _this = this
       this.fetchedLocations.forEach(function (location, index) {
@@ -55,6 +58,9 @@ export default {
         '<br><small><a href="' + loc.url + '" target="_blank">View on Yelp</a></small>'
 
       return popUpTemplate
+    },
+    centerMap: function () {
+      this.mapView.setView({lat: this.lat, lng: this.lng})
     }
   },
   watch: {

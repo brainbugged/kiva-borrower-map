@@ -1,8 +1,9 @@
 <template>
   <div class="container">
+    <SearchBar v-on:executeQuery="executeQuery"></SearchBar>
     <div class="map-holder">
       <!-- MapView component with fetchedLocations dynamically bound using v-bind shorthand -->
-      <MapView :fetchedLocations="locations"></MapView>
+      <MapView :fetchedLocations="locations" :lat="lat" :lng="lng"></MapView>
     </div>
     <h1>{{ msg }}</h1>
     <div class="list-holder">
@@ -14,6 +15,7 @@
 
 <script>
 import bus from './Event-Bus'
+import SearchBar from './Search-Bar.vue'
 import LocationList from './Location-List.vue'
 import * as axios from 'axios'
 import MapView from './Map.vue'
@@ -23,12 +25,15 @@ export default {
   data () {
     return {
       msg: 'Kiva US Borrowers',
-      locations: []
+      locations: [],
+      lat: 37.8043722,
+      lng: -122.2708026
     }
   },
   components: {
     LocationList,
-    MapView
+    MapView,
+    SearchBar
   },
   methods: {
     // Fetch our initial batch of Locations
@@ -37,6 +42,28 @@ export default {
       // console.log(query)
       axios.get('/locations').then((data) => {
         console.log(data)
+        // Assign our locations to the component data node for locations
+        data.data.forEach(function (element) {
+          _this.locations.push(element)
+        }, this)
+      })
+    },
+    executeQuery: function (queryData) {
+      console.log(queryData)
+      let _this = this
+      // update lat lng for map center
+      this.lat = queryData.latitude
+      this.lng = queryData.longitude
+      // console.log(query)
+      axios.get('/locations', {
+        params: {
+          radius: queryData.radius,
+          lat: queryData.latitude,
+          lng: queryData.longitude
+        }
+      }).then((data) => {
+        console.log(data)
+        _this.locations = []
         // Assign our locations to the component data node for locations
         data.data.forEach(function (element) {
           _this.locations.push(element)
@@ -51,6 +78,9 @@ export default {
     console.log('Home is mounted')
     // sample event emitted via event bus
     bus.$emit('home-loaded', 'home is loaded')
+    // SearchBar.$on('executeQuery', function () {
+    //   console.log('query locations intiated from search form')
+    // })
   }
 }
 </script>
@@ -60,7 +90,8 @@ export default {
 .map-holder {
   display: block;
   height: 600px;
-  width: 100%;
+  /* width: 100%; */
+  margin: 1.3rem;
 }
 
 @import "../../node_modules/leaflet/dist/leaflet.css";
