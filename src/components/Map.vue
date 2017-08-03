@@ -60,6 +60,7 @@ export default {
       return popUpTemplate
     },
     centerMap: function () {
+      console.log('centering')
       this.mapView.setView({lat: this.lat, lng: this.lng})
     }
   },
@@ -67,6 +68,12 @@ export default {
     // Watch our dynmaic props to response when they are updated
     fetchedLocations () {
       this.displayLocations()
+    },
+    lat () {
+      this.centerMap()
+    },
+    lng () {
+      this.centerMap()
     }
   },
   mounted () {

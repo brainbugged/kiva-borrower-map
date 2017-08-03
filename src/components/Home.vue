@@ -78,6 +78,8 @@ export default {
     },
     showUserLocation: function (userLocation) {
       console.log(userLocation)
+      this.lat = userLocation.latitude
+      this.lng = userLocation.longitude
     }
   },
   beforeMount () {
