@@ -1,6 +1,8 @@
 <template>
   <div class="container">
     <SearchBar v-on:executeQuery="executeQuery"></SearchBar>
+    <p v-if="noLocationMsg"><i>{{ noLocationMsg }}</i></p>
+    <p v-if="resultsMsg"><i>{{ resultsMsg }}</i></p>
     <div class="map-holder">
       <!-- MapView component with fetchedLocations dynamically bound using v-bind shorthand -->
       <MapView :fetchedLocations="locations" :lat="lat" :lng="lng" :bounds="bounds"></MapView>
@@ -33,8 +35,9 @@ export default {
       locations: [],
       lat: 37.8043722,
       lng: -122.2708026,
-      previousQuery: {},
-      bounds: {}
+      bounds: {},
+      noLocationMsg: '',
+      resultsMsg: ''
     }
   },
   components: {
@@ -60,9 +63,11 @@ export default {
       })
     },
     executeQuery: function (queryData) {
+      // clear error message
+      this.noLocationMsg = ''
+      this.resultsMsg = ''
       // store query
-      this.previousQuery = queryData
-      console.log(queryData)
+      this.lastAttemptedQuery = queryData
       // cache compoenent instance
       let _this = this
       // update lat lng for map center
@@ -79,22 +84,27 @@ export default {
         console.log(data)
         if (data.data.locations.length > 5) {
           _this.updateLocations(data.data)
+          _this.lastSuccessfulQuery = queryData
+          _this.resultsMsg = 'Showing results for ' + queryData.searchTerm + ' within ' + queryData.radius + ' miles.'
         } else {
           _this.expandRadius()
         }
       })
     },
     expandRadius: function () {
-      let newQuery = JSON.parse(JSON.stringify(this.previousQuery))
-      newQuery.radius = parseInt(this.previousQuery.radius) * 2
+      let newQuery = JSON.parse(JSON.stringify(this.lastAttemptedQuery))
+      newQuery.radius = parseInt(this.lastAttemptedQuery.radius) * 2
       if (newQuery.radius < 1000) {
         this.executeQuery(newQuery)
+      } else {
+        this.executeQuery(this.lastSuccessfulQuery)
+        this.noLocationMsg = 'No results within ' + newQuery.radius + 'miles. Please try another search.'
       }
     },
     updateLocations: function (queryData) {
+      this.bounds = queryData.bounds
       // Assign our locations to the component data node for locations
       this.locations = []
-      this.bounds = queryData.bounds
       this.locations = queryData.locations
     },
     showUserLocation: function (userLocation) {
