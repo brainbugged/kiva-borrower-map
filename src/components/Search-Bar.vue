@@ -1,13 +1,16 @@
 <template>
   <div class="search-bar">
-    <div class="row header-row">
-      <form class="search-form clearfix">
-        <div class="small-12 medium-5 large-6 columns">
+    <div class="row">
+      <div class="locator-holder small-12 large-3 column">
+        <Locator v-on:getLocation="showUserLocation"></Locator>
+      </div>
+      <form class="search-form clearfix small-12 large-9 column end">
+        <div class="small-12 medium-4 column">
           <input v-model="searchTerm" v-on:focus="selectAll" class="custom-location" type="text" />
         </div>
-        <div class="small-6 medium-4 large-3 columns">
+        <div class="small-6 medium-4 column">
           <select v-model="radius">
-            <option value="1">Radius in Miles</option>
+            <option value="1">Radius (Miles)</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="5">5</option>
@@ -16,7 +19,7 @@
             <option value="50">50</option>
           </select>
         </div>
-        <div class="small-6 medium-3 large-3 columns">
+        <div class="small-6 medium-4 column">
           <button v-on:click.prevent="geoCodeSearch" class="button setting">Search</button>
         </div>
       </form>
@@ -24,16 +27,21 @@
   </div>
 </template>
 
-<<script>
+<script>
+import Locator from './Locator.vue'
+
 export default {
   name: 'search',
   data () {
     return {
       radius: 1,
-      searchTerm: 'Search by City, State or Zip Code',
+      searchTerm: 'City, State or Zip Code',
       latitude: 37.8043722,
       longitude: -122.2708026
     }
+  },
+  components: {
+    Locator
   },
   methods: {
     geoCodeSearch () {
@@ -55,6 +63,13 @@ export default {
     initializeLocationQuery: function () {
       this.$emit('executeQuery', JSON.parse(JSON.stringify(this.$data)))
     },
+    showUserLocation: function (userLocation) {
+      console.log(userLocation)
+      this.searchTerm = 'Your Location'
+      this.latitude = userLocation.latitude
+      this.longitude = userLocation.longitude
+      this.initializeLocationQuery()
+    },
     selectAll: function (event) {
       // Workaround for Safari bug
       // http://stackoverflow.com/questions/1269722/selecting-text-on-focus-using-jquery-not-working-in-safari-and-chrome
@@ -69,12 +84,24 @@ export default {
 <style scoped>
 .search-form {
   display: block;
-  width: auto;
-  padding: 1rem 0;
+  padding: 0;
 }
-@media only screen and (min-width: 681px) {
-  .top-nav .columns {
-    /* width: inherit; */
-  }
+.search-bar button {
+  margin: 0;
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+.search-bar input {
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+.search-bar select {
+  margin: 0;
+  height: 1.5rem;
+  line-height: auto;
+  padding: 0 .25rem 0;
+}
+.locator-holder {
+  padding: 0 0 1rem;
 }
 </style>

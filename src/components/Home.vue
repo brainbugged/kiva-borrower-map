@@ -1,28 +1,29 @@
 <template>
   <div class="container">
+    <h1>{{ msg }}</h1>
+    <!-- <div class="locator-holder">
+      <Locator v-on:getLocation="showUserLocation"></Locator>
+    </div> -->
+    <!-- SearchBar component we watch for the executeQuery event and fire our local executeQuery method -->
     <SearchBar v-on:executeQuery="executeQuery"></SearchBar>
+    <!-- conditional messaging -->
     <p v-if="noLocationMsg"><i>{{ noLocationMsg }}</i></p>
     <p v-if="resultsMsg"><i>{{ resultsMsg }}</i></p>
     <div class="map-holder">
       <!-- MapView component with fetchedLocations dynamically bound using v-bind shorthand -->
       <MapView :fetchedLocations="locations" :lat="lat" :lng="lng" :bounds="bounds"></MapView>
     </div>
-    <h1>{{ msg }}</h1>
-    <!--does this bind the method getLocation  from Locator.vue to the variable userLocation? -->
-    <div class="locator-holder">
-      <Locator v-on:getLocation="showUserLocation"></Locator>
-    </div>
-    <div class="list-holder">
+    <!-- <div class="list-holder"> -->
       <!-- LocationList  component with fetchedLocations dynamically bound using v-bind standard -->
-      <LocationList v-bind:fetchedLocations="locations"></LocationList>
-    </div>
+      <!-- <LocationList v-bind:fetchedLocations="locations"></LocationList> -->
+    <!-- </div> -->
   </div>
 </template>
 
 <script>
 import bus from './Event-Bus'
 import SearchBar from './Search-Bar.vue'
-import LocationList from './Location-List.vue'
+// import LocationList from './Location-List.vue'
 import * as axios from 'axios'
 import MapView from './Map.vue'
 import Locator from './Locator.vue'
@@ -41,7 +42,7 @@ export default {
     }
   },
   components: {
-    LocationList,
+    // LocationList,
     MapView,
     Locator,
     SearchBar
@@ -106,12 +107,13 @@ export default {
       // Assign our locations to the component data node for locations
       this.locations = []
       this.locations = queryData.locations
-    },
-    showUserLocation: function (userLocation) {
-      console.log(userLocation)
-      this.lat = userLocation.latitude
-      this.lng = userLocation.longitude
     }
+    // ,
+    // showUserLocation: function (userLocation) {
+    //   console.log(userLocation)
+    //   this.lat = userLocation.latitude
+    //   this.lng = userLocation.longitude
+    // }
   },
   beforeMount () {
     this.fetchLocations('test query')
