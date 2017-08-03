@@ -22,7 +22,7 @@ app.get('/locations', (req, res) => {
     location = {};
     location.lat = (req.query.lat) ? req.query.lat : dataHelpers.OAKLAND.lat;
     location.lng  = (req.query.lng) ? req.query.lng : dataHelpers.OAKLAND.lng;
-    
+
     // Check for custom radius
     radius = (req.query.radius) ? req.query.radius : null;
   }
@@ -33,7 +33,7 @@ app.get('/locations', (req, res) => {
 
   // return filtered locations
   res.type('json');
-  res.status(200).json(filteredLocations);
+  res.status(200).json({locations: filteredLocations, bounds: bounds});
 });
 
 /* Initialize serving of static files pointing to our Vuejs dist folder

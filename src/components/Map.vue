@@ -13,9 +13,10 @@ export default {
       // mapView: {}
       // lat: this.lat,
       // lng: this.lng
+      // currentLocationLayer: {}
     }
   },
-  props: ['fetchedLocations', 'lat', 'lng'],
+  props: ['fetchedLocations', 'lat', 'lng', 'bounds'],
   methods: {
     initalizeMap: function () {
       this.mapView = L.map('map').setView({lat: this.lat, lng: this.lng}, 15)
@@ -27,20 +28,32 @@ export default {
           attribution: 'Map data &copy; ' + mapLink,
           maxZoom: 18
         }).addTo(this.mapView)
+
+      // create layer group to more easily manage markers
+      this.currentLocationLayer = L.layerGroup()
+      this.currentLocationLayer.addTo(this.mapView)
     },
     displayLocations: function () {
-      this.centerMap()
-      // console.log(this.mapView)
+      this.setMapViewWithBounds()
+      this.updateLocationLayer()
+    },
+    updateLocationLayer: function () {
+      console.log('Removing ' + this.currentLocationLayer.getLayers().length + ' layers...')
+      this.currentLocationLayer.clearLayers()
       let _this = this
       this.fetchedLocations.forEach(function (location, index) {
         let loc = location
         let popUpTemplate = _this.buildLocationInfo(loc)
-        // L.marker([location.coordinates.latitude, location.coordinates.longitude]).addTo(_this.mapView)
-        L.circleMarker(
+        let marker = L.circleMarker(
           [loc.coordinates.latitude, loc.coordinates.longitude],
-          {radius: 9, stroke: false, fillOpacity: 0.8, fillColor: '#63a541'}).addTo(_this.mapView)
+          {radius: 9, stroke: false, fillOpacity: 0.8, fillColor: '#63a541'})
           .bindPopup(popUpTemplate)
+        // add marker to layer group
+        _this.currentLocationLayer.addLayer(marker)
       })
+      // Add the Layer Group to the Map
+      // this.currentLocationLayer.addTo(this.mapView)
+      console.log(this.currentLocationLayer.getLayers().length + ' layers added to layerGroup')
     },
     buildLocationInfo: function (loc) {
       // Build the location details in the most ugly way possible
@@ -58,6 +71,14 @@ export default {
         '<br><small><a href="' + loc.url + '" target="_blank">View on Yelp</a></small>'
 
       return popUpTemplate
+    },
+    setMapViewWithBounds: function () {
+      if (this.bounds && this.bounds.latmin) {
+        this.mapView.fitBounds([
+          [this.bounds.latmin, this.bounds.lngmin],
+          [this.bounds.latmax, this.bounds.lngmax]
+        ])
+      }
     },
     centerMap: function () {
       console.log('centering')
