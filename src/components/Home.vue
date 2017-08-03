@@ -3,7 +3,7 @@
     <SearchBar v-on:executeQuery="executeQuery"></SearchBar>
     <div class="map-holder">
       <!-- MapView component with fetchedLocations dynamically bound using v-bind shorthand -->
-      <MapView :fetchedLocations="locations" :lat="lat" :lng="lng"></MapView>
+      <MapView :fetchedLocations="locations" :lat="lat" :lng="lng" :bounds="bounds"></MapView>
     </div>
     <h1>{{ msg }}</h1>
     <!--does this bind the method getLocation  from Locator.vue to the variable userLocation? -->
@@ -32,7 +32,9 @@ export default {
       msg: 'Kiva US Borrowers',
       locations: [],
       lat: 37.8043722,
-      lng: -122.2708026
+      lng: -122.2708026,
+      previousQuery: {},
+      bounds: {}
     }
   },
   components: {
@@ -44,23 +46,29 @@ export default {
   methods: {
     // Fetch our initial batch of Locations
     fetchLocations: function (query) {
+      // store query
+      this.previousQuery = query
+      // cache compoenent instance
       let _this = this
-      // console.log(query)
       axios.get('/locations').then((data) => {
         console.log(data)
-        // Assign our locations to the component data node for locations
-        data.data.forEach(function (element) {
-          _this.locations.push(element)
-        }, this)
+        if (data.data.locations.length > 0) {
+          _this.updateLocations(data.data)
+        } else {
+          _this.expandRadius()
+        }
       })
     },
     executeQuery: function (queryData) {
+      // store query
+      this.previousQuery = queryData
       console.log(queryData)
+      // cache compoenent instance
       let _this = this
       // update lat lng for map center
       this.lat = queryData.latitude
       this.lng = queryData.longitude
-      // console.log(query)
+
       axios.get('/locations', {
         params: {
           radius: queryData.radius,
@@ -69,12 +77,25 @@ export default {
         }
       }).then((data) => {
         console.log(data)
-        _this.locations = []
-        // Assign our locations to the component data node for locations
-        data.data.forEach(function (element) {
-          _this.locations.push(element)
-        }, this)
+        if (data.data.locations.length > 5) {
+          _this.updateLocations(data.data)
+        } else {
+          _this.expandRadius()
+        }
       })
+    },
+    expandRadius: function () {
+      let newQuery = JSON.parse(JSON.stringify(this.previousQuery))
+      newQuery.radius = parseInt(this.previousQuery.radius) * 2
+      if (newQuery.radius < 1000) {
+        this.executeQuery(newQuery)
+      }
+    },
+    updateLocations: function (queryData) {
+      // Assign our locations to the component data node for locations
+      this.locations = []
+      this.bounds = queryData.bounds
+      this.locations = queryData.locations
     },
     showUserLocation: function (userLocation) {
       console.log(userLocation)

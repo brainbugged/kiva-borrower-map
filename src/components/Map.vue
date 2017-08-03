@@ -15,7 +15,7 @@ export default {
       // lng: this.lng
     }
   },
-  props: ['fetchedLocations', 'lat', 'lng'],
+  props: ['fetchedLocations', 'lat', 'lng', 'bounds'],
   methods: {
     initalizeMap: function () {
       this.mapView = L.map('map').setView({lat: this.lat, lng: this.lng}, 15)
@@ -29,7 +29,7 @@ export default {
         }).addTo(this.mapView)
     },
     displayLocations: function () {
-      this.centerMap()
+      this.setMapViewWithBounds()
       // console.log(this.mapView)
       let _this = this
       this.fetchedLocations.forEach(function (location, index) {
@@ -58,6 +58,12 @@ export default {
         '<br><small><a href="' + loc.url + '" target="_blank">View on Yelp</a></small>'
 
       return popUpTemplate
+    },
+    setMapViewWithBounds: function () {
+      this.mapView.fitBounds([
+        [this.bounds.latmin, this.bounds.lngmin],
+        [this.bounds.latmax, this.bounds.lngmax]
+      ])
     },
     centerMap: function () {
       console.log('centering')
