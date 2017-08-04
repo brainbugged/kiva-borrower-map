@@ -40,7 +40,7 @@ app.get('/locations', (req, res) => {
  * - Our Vuejs build will output html/css/js to this folder
  * - This setup will server these at the root as we have't passed an optional destination
  */
-app.use(express.static('dist'));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 // Tell the app to listen for connections
 app.listen(8081, ()=>{

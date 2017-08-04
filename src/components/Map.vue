@@ -21,21 +21,22 @@ export default {
     initalizeMap: function () {
       this.mapView = L.map('map').setView({lat: this.lat, lng: this.lng}, 15)
 
-      // // uncomment for Open Street Maps
-      let openStreetTile = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-      let mapTile = openStreetTile
-      let mapLink = 'https://www.openstreetmap.org'
+      // uncomment for Open Street Maps
+      // let openStreetLink = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      // let mapTile = openStreetLink
+      // let mapLink = openStreetLink
 
-      // // uncomment for Mapbox styles
-      // let accessToken = 'pk.eyJ1IjoibWZhYnJvcyIsImEiOiJjaW9raTI1NzgwMDFndXVqYmJ5bnF5bnIxIn0.DmUQmGI5wqeiGZLMw7BJ8g'
-      // // different map styles for changing in mapTile
-      // let mapStyles = {
-      //   'default': 'https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=',
-      //   'satellite': 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}?access_token=',
-      //   'traffic': 'https://api.mapbox.com/styles/v1/mapbox/traffic-day-v2/tiles/256/{z}/{x}/{y}?access_token='
-      // }
-      // let mapTile = mapStyles.traffic + accessToken
-      // let mapLink = 'https://www.mapbox.com'
+      // uncomment for Mapbox styles
+      // different map styles for changing in mapLink and L.tileLayer
+      let accessToken = 'pk.eyJ1IjoibWZhYnJvcyIsImEiOiJjaW9raTI1NzgwMDFndXVqYmJ5bnF5bnIxIn0.DmUQmGI5wqeiGZLMw7BJ8g'
+      let mapStyles = {
+        'default': 'https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=',
+        'satellite': 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}?access_token=',
+        'traffic': 'https://api.mapbox.com/styles/v1/mapbox/traffic-day-v2/tiles/256/{z}/{x}/{y}?access_token='
+      }
+
+      let mapLink = mapStyles.default + '{' + accessToken + '}'
+      let mapTile = mapStyles.default + accessToken
 
       L.tileLayer(
           mapTile, {
@@ -60,7 +61,7 @@ export default {
         let popUpTemplate = _this.buildLocationInfo(loc)
         let marker = L.circleMarker(
           [loc.coordinates.latitude, loc.coordinates.longitude],
-          {radius: 9, stroke: false, fillOpacity: 0.8, fillColor: '#63a541'})
+          {radius: 9, fillOpacity: 0.8, fillColor: '#63a541', color: '#236133', weight: 2})
           .bindPopup(popUpTemplate)
         // add marker to layer group
         _this.currentLocationLayer.addLayer(marker)

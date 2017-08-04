@@ -42,14 +42,14 @@ function filterLocations(jsonData, customBounds) {
     } else {
         boundaries = customBounds;
     }
-    console.log(boundaries);
+    // console.log(boundaries);
 
     let filteredResults = [];
 
     jsonData.forEach(function(obj, index) {
         if (isWithinBounds(obj.coordinates.latitude, obj.coordinates.longitude)) {
             filteredResults.push(obj);
-            console.log(obj.coordinates.latitude, obj.coordinates.longitude, index);
+            // console.log(obj.coordinates.latitude, obj.coordinates.longitude, index);
         }
     }, this);
 
