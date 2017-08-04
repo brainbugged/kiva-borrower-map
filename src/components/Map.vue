@@ -22,20 +22,20 @@ export default {
       this.mapView = L.map('map').setView({lat: this.lat, lng: this.lng}, 15)
 
       // // uncomment for Open Street Maps
-      let openStreetTile = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-      let mapTile = openStreetTile
-      let mapLink = 'https://www.openstreetmap.org'
+      // let openStreetTile = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      // let mapTile = openStreetTile
+      // let mapLink = 'https://www.openstreetmap.org'
 
-      // // uncomment for Mapbox styles
-      // let accessToken = 'pk.eyJ1IjoibWZhYnJvcyIsImEiOiJjaW9raTI1NzgwMDFndXVqYmJ5bnF5bnIxIn0.DmUQmGI5wqeiGZLMw7BJ8g'
-      // // different map styles for changing in mapTile
-      // let mapStyles = {
-      //   'default': 'https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=',
-      //   'satellite': 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}?access_token=',
-      //   'traffic': 'https://api.mapbox.com/styles/v1/mapbox/traffic-day-v2/tiles/256/{z}/{x}/{y}?access_token='
-      // }
-      // let mapTile = mapStyles.traffic + accessToken
-      // let mapLink = 'https://www.mapbox.com'
+      // uncomment for Mapbox styles
+      let accessToken = 'pk.eyJ1IjoibWZhYnJvcyIsImEiOiJjaW9raTI1NzgwMDFndXVqYmJ5bnF5bnIxIn0.DmUQmGI5wqeiGZLMw7BJ8g'
+      // different map styles for changing in mapTile
+      let mapStyles = {
+        'default': 'https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=',
+        'satellite': 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}?access_token=',
+        'traffic': 'https://api.mapbox.com/styles/v1/mapbox/traffic-day-v2/tiles/256/{z}/{x}/{y}?access_token='
+      }
+      let mapTile = mapStyles.default + accessToken
+      let mapLink = 'https://www.mapbox.com'
 
       L.tileLayer(
           mapTile, {
