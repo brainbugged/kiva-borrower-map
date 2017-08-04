@@ -20,20 +20,29 @@ export default {
   methods: {
     initalizeMap: function () {
       this.mapView = L.map('map').setView({lat: this.lat, lng: this.lng}, 15)
-      let accessToken = 'pk.eyJ1IjoibWZhYnJvcyIsImEiOiJjaW9raTI1NzgwMDFndXVqYmJ5bnF5bnIxIn0.DmUQmGI5wqeiGZLMw7BJ8g'
+
+      // uncomment for Open Street Maps
+      // let openStreetLink = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      // let mapTile = openStreetLink
+      // let mapLink = openStreetLink
+
+      // uncomment for Mapbox styles
       // different map styles for changing in mapLink and L.tileLayer
+      let accessToken = 'pk.eyJ1IjoibWZhYnJvcyIsImEiOiJjaW9raTI1NzgwMDFndXVqYmJ5bnF5bnIxIn0.DmUQmGI5wqeiGZLMw7BJ8g'
       let mapStyles = {
         'default': 'https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=',
         'satellite': 'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}?access_token=',
         'traffic': 'https://api.mapbox.com/styles/v1/mapbox/traffic-day-v2/tiles/256/{z}/{x}/{y}?access_token='
       }
+
       let mapLink = mapStyles.traffic + '{' + accessToken + '}'
+      let mapTile = mapStyles.traffic + accessToken
 
       L.tileLayer(
-        mapStyles.traffic + accessToken, {
-          attribution: 'Map data &copy; ' + mapLink,
-          maxZoom: 18
-        }).addTo(this.mapView)
+          mapTile, {
+            attribution: 'Map data &copy; ' + mapLink,
+            maxZoom: 18
+          }).addTo(this.mapView)
 
       // create layer group to more easily manage markers
       this.currentLocationLayer = L.layerGroup()
