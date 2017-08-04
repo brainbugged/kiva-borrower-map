@@ -1,9 +1,6 @@
 <template>
   <div class="container">
     <h1>{{ msg }}</h1>
-    <!-- <div class="locator-holder">
-      <Locator v-on:getLocation="showUserLocation"></Locator>
-    </div> -->
     <!-- SearchBar component we watch for the executeQuery event and fire our local executeQuery method -->
     <SearchBar v-on:executeQuery="executeQuery"></SearchBar>
     <!-- conditional messaging -->
@@ -13,17 +10,17 @@
       <!-- MapView component with fetchedLocations dynamically bound using v-bind shorthand -->
       <MapView :fetchedLocations="locations" :lat="lat" :lng="lng" :bounds="bounds"></MapView>
     </div>
-    <!-- <div class="list-holder"> -->
+     <div class="list-holder"> 
       <!-- LocationList  component with fetchedLocations dynamically bound using v-bind standard -->
-      <!-- <LocationList v-bind:fetchedLocations="locations"></LocationList> -->
-    <!-- </div> -->
+       <LocationList v-bind:fetchedLocations="locations"></LocationList> 
+     </div> 
   </div>
 </template>
 
 <script>
 import bus from './Event-Bus'
 import SearchBar from './Search-Bar.vue'
-// import LocationList from './Location-List.vue'
+import LocationList from './Location-List.vue'
 import * as axios from 'axios'
 import MapView from './Map.vue'
 import Locator from './Locator.vue'
@@ -34,6 +31,7 @@ export default {
     return {
       msg: 'Kiva US Borrowers',
       locations: [],
+      radius: 1,
       lat: 37.8043722,
       lng: -122.2708026,
       bounds: {},
@@ -42,51 +40,43 @@ export default {
     }
   },
   components: {
-    // LocationList,
+    LocationList,
     MapView,
     Locator,
     SearchBar
   },
   methods: {
-    // Fetch our initial batch of Locations
-    fetchLocations: function (query) {
-      // store query
-      this.previousQuery = query
-      // cache compoenent instance
-      let _this = this
-      axios.get('/locations').then((data) => {
-        console.log(data)
-        if (data.data.locations.length > 0) {
-          _this.updateLocations(data.data)
-        } else {
-          _this.expandRadius()
-        }
-      })
-    },
     executeQuery: function (queryData) {
       // clear error message
       this.noLocationMsg = ''
       this.resultsMsg = ''
-      // store query
-      this.lastAttemptedQuery = queryData
+      // store attempted query
+      if (queryData) {
+        this.lastAttemptedQuery = queryData
+      }
+      // update radius, lat, + lng for map center
+      this.radius = queryData ? queryData.radius : 1
+      this.lat = queryData ? queryData.latitude : 37.8043722
+      this.lng = queryData ? queryData.longitude : -122.2708026
+
       // cache compoenent instance
       let _this = this
-      // update lat lng for map center
-      this.lat = queryData.latitude
-      this.lng = queryData.longitude
 
       axios.get('/locations', {
         params: {
-          radius: queryData.radius,
-          lat: queryData.latitude,
-          lng: queryData.longitude
+          radius: _this.radius,
+          lat: _this.lat,
+          lng: _this.lng
         }
       }).then((data) => {
-        console.log(data)
-        if (data.data.locations.length > 5) {
+        // console.log(data)
+        // Only show locations if there are mofe
+        if (data.data.locations.length > 2) {
           _this.updateLocations(data.data)
-          _this.lastSuccessfulQuery = queryData
-          _this.resultsMsg = 'Showing results for ' + queryData.searchTerm + ' within ' + queryData.radius + ' miles.'
+          if (queryData) {
+            _this.lastSuccessfulQuery = queryData
+            _this.resultsMsg = 'Showing results for ' + queryData.searchTerm + ' within ' + queryData.radius + ' miles.'
+          }
         } else {
           _this.expandRadius()
         }
@@ -108,23 +98,14 @@ export default {
       this.locations = []
       this.locations = queryData.locations
     }
-    // ,
-    // showUserLocation: function (userLocation) {
-    //   console.log(userLocation)
-    //   this.lat = userLocation.latitude
-    //   this.lng = userLocation.longitude
-    // }
   },
   beforeMount () {
-    this.fetchLocations('test query')
+    this.executeQuery()
   },
   mounted () {
-    console.log('Home is mounted')
+    // console.log('Home is mounted')
     // sample event emitted via event bus
     bus.$emit('home-loaded', 'home is loaded')
-    // SearchBar.$on('executeQuery', function () {
-    //   console.log('query locations intiated from search form')
-    // })
   }
 }
 </script>

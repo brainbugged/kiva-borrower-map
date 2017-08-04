@@ -9,12 +9,7 @@ import L from 'leaflet'
 export default {
   name: 'map',
   data () {
-    return {
-      // mapView: {}
-      // lat: this.lat,
-      // lng: this.lng
-      // currentLocationLayer: {}
-    }
+    return {}
   },
   props: ['fetchedLocations', 'lat', 'lng', 'bounds'],
   methods: {
@@ -49,8 +44,8 @@ export default {
       this.currentLocationLayer.addTo(this.mapView)
     },
     displayLocations: function () {
-      this.setMapViewWithBounds()
       this.updateLocationLayer()
+      this.setMapViewWithBounds()
     },
     updateLocationLayer: function () {
       console.log('Removing ' + this.currentLocationLayer.getLayers().length + ' layers...')
@@ -61,7 +56,7 @@ export default {
         let popUpTemplate = _this.buildLocationInfo(loc)
         let marker = L.circleMarker(
           [loc.coordinates.latitude, loc.coordinates.longitude],
-          {radius: 9, fillOpacity: 0.8, fillColor: '#63a541', color: '#236133', weight: 2})
+          {radius: 11, fillOpacity: 0.8, fillColor: '#63a541', color: '#236133', weight: 2})
           .bindPopup(popUpTemplate)
         // add marker to layer group
         _this.currentLocationLayer.addLayer(marker)

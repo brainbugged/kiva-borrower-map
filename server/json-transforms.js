@@ -53,7 +53,7 @@ function filterLocations(jsonData, customBounds) {
         }
     }, this);
 
-    console.log(filteredResults.length + ' entries');
+    // console.log(filteredResults.length + ' entries');
     return filteredResults;
 }
 

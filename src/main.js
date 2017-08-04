@@ -6,7 +6,8 @@ import router from './router'
 
 require('./assets/export/styles.css')
 
-Vue.config.productionTip = true
+Vue.config.productionTip = false
+Vue.config.performance = false
 
 /* eslint-disable no-new */
 new Vue({
