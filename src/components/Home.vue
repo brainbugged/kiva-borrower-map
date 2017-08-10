@@ -2,17 +2,17 @@
   <div class="container">
     <h1>{{ msg }}</h1>
     <!-- SearchBar component we watch for the executeQuery event and fire our local executeQuery method -->
-    <SearchBar v-on:executeQuery="executeQuery"></SearchBar>
+    <search-bar v-on:executeQuery="executeQuery"></search-bar>
     <!-- conditional messaging -->
     <p v-if="noLocationMsg"><i>{{ noLocationMsg }}</i></p>
     <p v-if="resultsMsg"><i>{{ resultsMsg }}</i></p>
     <div class="map-holder">
       <!-- MapView component with fetchedLocations dynamically bound using v-bind shorthand -->
-      <MapView :fetchedLocations="locations" :lat="lat" :lng="lng" :bounds="bounds"></MapView>
+      <map-view :fetchedLocations="locations" :lat="lat" :lng="lng" :bounds="bounds"></map-view>
     </div>
      <div class="list-holder"> 
       <!-- LocationList  component with fetchedLocations dynamically bound using v-bind standard -->
-       <LocationList v-bind:fetchedLocations="locations"></LocationList> 
+       <location-list v-bind:fetchedLocations="locations"></location-list> 
      </div> 
   </div>
 </template>
@@ -29,7 +29,7 @@ export default {
   name: 'home',
   data () {
     return {
-      msg: 'Kiva US Borrowers',
+      msg: 'US Borrowers',
       locations: [],
       radius: 1,
       lat: 37.8043722,

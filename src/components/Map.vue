@@ -7,7 +7,7 @@ import bus from './Event-Bus'
 import L from 'leaflet'
 
 export default {
-  name: 'map',
+  name: 'map-view',
   data () {
     return {}
   },

@@ -2,7 +2,7 @@
   <div class="search-bar">
     <div class="row">
       <div class="locator-holder small-12 large-3 column">
-        <Locator v-on:getLocation="showUserLocation"></Locator>
+        <locator v-on:getLocation="showUserLocation"></locator>
       </div>
       <form class="search-form clearfix small-12 large-9 column end">
         <div class="small-12 medium-4 column">
@@ -31,7 +31,7 @@
 import Locator from './Locator.vue'
 
 export default {
-  name: 'search',
+  name: 'search-bar',
   data () {
     return {
       radius: 1,
